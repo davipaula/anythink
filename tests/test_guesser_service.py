@@ -1,13 +1,13 @@
-from anythink.guesser_service import guess_word
+from anythink.guesser_service import GuesserService
 
 
 def test_when_word_is_not_in_list_return_error():
-    result = guess_word("unknown_word")
+    result = GuesserService().guess_word("unknown_word")
 
     assert result.found is False
 
 
 def test_when_word_is_in_list_return_true():
-    result = guess_word("word")
+    result = GuesserService().guess_word("search")
 
     assert result.found is True

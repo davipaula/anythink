@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-WORDS = ["word", "apple", "music", "phantom", "phone", "head", "set"]
+from word_generator import generate_word_of_day
 
 
 @dataclass
@@ -10,8 +10,19 @@ class GuessResult:
     position: int
 
 
-def guess_word(word: str) -> GuessResult:
-    if word in WORDS:
-        return GuessResult(found=True, word=word, position=WORDS.index(word) + 1)
-    else:
-        return GuessResult(found=False, word=word, position=0)
+class GuesserService:
+    def __init__(self):
+        self.word_of_day = generate_word_of_day()
+
+    def guess_word(self, word: str) -> GuessResult:
+        if word in self.word_of_day.related_words:
+            return GuessResult(
+                found=True,
+                word=word,
+                position=self.word_of_day.related_words.index(word) + 1,
+            )
+        else:
+            return GuessResult(found=False, word=word, position=0)
+
+    def get_word_of_day(self) -> str:
+        return self.word_of_day.word
