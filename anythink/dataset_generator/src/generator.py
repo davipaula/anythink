@@ -93,17 +93,19 @@ def __open_common_words() -> list[str]:
             if MAXIMUM_WORD_LENGTH >= len(row[0]) > MINIMUM_WORD_LENGTH
         ]
 
-    logger.info(f"Loaded Common English words file. File contains {len(common_words)} lines")
+    logger.info(
+        f"Loaded Common English words file. File contains {len(common_words)} lines"
+    )
 
     return common_words
 
 
 def __is_valid(token: Token):
     return (
-            not token.is_stop
-            and token.is_alpha
-            and not token.like_num
-            and token.pos_ in VALID_POSITIONS
+        not token.is_stop
+        and token.is_alpha
+        and not token.like_num
+        and token.pos_ in VALID_POSITIONS
     )
 
 
